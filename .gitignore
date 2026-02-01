@@ -2,3 +2,5 @@ kairo-debug
 build_debug/
 build_release/
 cmake/toolchains/
+build/
+.cache/

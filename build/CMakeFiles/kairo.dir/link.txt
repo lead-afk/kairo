@@ -1,1 +1,0 @@
-/usr/bin/g++ -g CMakeFiles/kairo.dir/main.cpp.o CMakeFiles/kairo.dir/src/Clock.cpp.o -o kairo 

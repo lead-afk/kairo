@@ -1,4 +1,7 @@
 cmake_minimum_required(VERSION 3.26)
+
+set(CMAKE_TOOLCHAIN_FILE "$ENV{HOME}/vcpkg/scripts/buildsystems/vcpkg.cmake" CACHE STRING "Vcpkg toolchain file")
+
 project(kairo LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 23)
@@ -21,6 +24,7 @@ if(EXISTS "${CMAKE_SOURCE_DIR}/main.cpp")
 endif()
 
 # Create executable
+find_package(unofficial-uwebsockets CONFIG REQUIRED)
 add_executable(kairo ${MAIN_SOURCES} ${LIB_SOURCES})
 
 # Tests
@@ -28,6 +32,8 @@ file(GLOB TEST_SOURCES "tests/*.cpp")
 
 foreach(TEST_FILE ${TEST_SOURCES})
     get_filename_component(TEST_NAME ${TEST_FILE} NAME_WE)
+find_package(unofficial-uwebsockets CONFIG REQUIRED)
     add_executable(${TEST_NAME} ${TEST_FILE} ${LIB_SOURCES})
     target_include_directories(${TEST_NAME} PRIVATE ${CMAKE_SOURCE_DIR}/include)
 endforeach()
+target_link_libraries(${PROJECT_NAME} PRIVATE unofficial::uwebsockets::uwebsockets)

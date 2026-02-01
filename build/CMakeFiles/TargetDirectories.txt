@@ -1,5 +1,0 @@
-/home/main/projects/kairo/build/CMakeFiles/kairo.dir
-/home/main/projects/kairo/build/CMakeFiles/test_thread_pool.dir
-/home/main/projects/kairo/build/CMakeFiles/test_thread_safe_queue.dir
-/home/main/projects/kairo/build/CMakeFiles/edit_cache.dir
-/home/main/projects/kairo/build/CMakeFiles/rebuild_cache.dir

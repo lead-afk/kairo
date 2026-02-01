@@ -107,6 +107,12 @@ class ThreadSafeQueue
     // }
 
     /**
+     * @brief Closes the queue permanently. Unblocks all waiting threads.
+     * Future operations will return false/nullopt.
+     */
+    void close();
+
+    /**
      * @brief Returns the current number of elements in the queue.
      * @return Number of elements in the queue.
      */
@@ -231,6 +237,15 @@ void ThreadSafeQueue<T>::clear(bool full_clear)
         buffer.resize(max_size);
     }
     closed.store(false);
+}
+
+template <typename T>
+void ThreadSafeQueue<T>::close()
+{
+    std::unique_lock<std::mutex> lock(mutex);
+    closed.store(true);
+    not_empty.notify_all();
+    not_full.notify_all();
 }
 
 template <typename T>
