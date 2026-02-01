@@ -1,0 +1,8 @@
+BasedOnStyle: LLVM
+IndentWidth: 4
+NamespaceIndentation: None
+BreakBeforeBraces: Allman
+AlwaysBreakTemplateDeclarations: true
+AllowShortFunctionsOnASingleLine: Inline
+SortIncludes: true
+Standard: c++20

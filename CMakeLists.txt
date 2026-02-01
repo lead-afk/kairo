@@ -9,12 +9,25 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 include_directories(${CMAKE_SOURCE_DIR}/include)
 
 # Collect all source files
-file(GLOB_RECURSE SOURCES "src/*.cpp")
+file(GLOB_RECURSE ALL_SOURCES "src/*.cpp")
+
+# Separate main sources and library sources
+set(MAIN_SOURCES "")
+set(LIB_SOURCES ${ALL_SOURCES})
 
 # Add main.cpp if it exists in the root
 if(EXISTS "${CMAKE_SOURCE_DIR}/main.cpp")
-    list(APPEND SOURCES "${CMAKE_SOURCE_DIR}/main.cpp")
+    list(APPEND MAIN_SOURCES "${CMAKE_SOURCE_DIR}/main.cpp")
 endif()
 
 # Create executable
-add_executable(kairo ${SOURCES})
+add_executable(kairo ${MAIN_SOURCES} ${LIB_SOURCES})
+
+# Tests
+file(GLOB TEST_SOURCES "tests/*.cpp")
+
+foreach(TEST_FILE ${TEST_SOURCES})
+    get_filename_component(TEST_NAME ${TEST_FILE} NAME_WE)
+    add_executable(${TEST_NAME} ${TEST_FILE} ${LIB_SOURCES})
+    target_include_directories(${TEST_NAME} PRIVATE ${CMAKE_SOURCE_DIR}/include)
+endforeach()

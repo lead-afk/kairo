@@ -5,6 +5,7 @@
       "name": "Debug kairo",
       "type": "cppdbg",
       "request": "launch",
+      "preLaunchTask": "Build Debug",
       "program": "${workspaceFolder}/kairo-debug",
       "args": [],
       "stopAtEntry": false,

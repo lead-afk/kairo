@@ -42,7 +42,7 @@ void test_thread_pool_try_push()
     std::atomic<int> processed{0};
     auto worker = [&](int data) { processed++; };
 
-    ThreadPool<int> pool(worker, 1, 12);
+    ThreadPool<int> pool(worker, 1);
 
     // Assuming queue has limited capacity, but since not implemented, this
     // placeholder
@@ -57,7 +57,7 @@ void test_thread_pool_size_capacity()
     std::atomic<int> dummy{0};
     auto worker = [&](int) { dummy++; };
 
-    ThreadPool<int> pool(worker, 2, 12);
+    ThreadPool<int> pool(worker, 2);
 
     // These will depend on the underlying queue capacity
     size_t cap = pool.capacity();
@@ -76,7 +76,7 @@ void test_thread_pool_concurrent()
         std::this_thread::sleep_for(std::chrono::milliseconds(5));
     };
 
-    ThreadPool<int> pool(worker, 4, 12);
+    ThreadPool<int> pool(worker, 4);
 
     // Push many items
     for (int i = 1; i <= 100; ++i)
